@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>AIの虎 — 顔を出さずに、挑んでいい</title>
-<meta name="description" content="人とAIが同じ土俵でピッチする番組。虎は、目の前の相手がどちらなのか知らないまま裁く。第一回 志願者募集中。">
+<title>干支ファウンディング — 顔を出さずに、挑んでいい</title>
+<meta name="description" content="人とAIが同じ土俵でピッチする番組。十二支の審査官は、目の前の相手がどちらなのか知らないまま裁く。第一回 挑戦者募集中。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314110F'/%3E%3Crect x='5' y='4' width='6' height='24' fill='%232A2521'/%3E%3Crect x='13' y='4' width='6' height='24' fill='%23A44A2A'/%3E%3Crect x='21' y='4' width='6' height='24' fill='%23265343'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,17 +52,27 @@ a{color:inherit}
 
 .eyebrow{
   font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;
-  color:var(--kin);text-transform:uppercase;display:block;margin-bottom:1.5rem;
+  color:var(--kin);display:block;margin-bottom:1.5rem;
 }
 
 /* ── ヒーロー ───────────────────────────── */
-.hero{position:relative;padding:clamp(64px,11vh,120px) 0 clamp(56px,8vh,88px);overflow:hidden}
+.hero{position:relative;padding:clamp(56px,9vh,104px) 0 clamp(56px,8vh,88px);overflow:hidden}
 .hero::before{
   content:"";position:absolute;inset:0;
   background:radial-gradient(115% 78% at 12% 0%,rgba(27,59,47,.55) 0%,transparent 62%);
   pointer-events:none;
 }
 .hero-inner{position:relative}
+.brand{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(1rem,1.9vw,1.24rem);letter-spacing:.04em;
+  color:var(--kinu);margin-bottom:clamp(28px,5vh,48px);
+  display:flex;align-items:center;gap:.7rem;
+}
+.brand::after{
+  content:"";flex:1;height:1px;max-width:120px;
+  background:linear-gradient(90deg,var(--kaki),transparent);
+}
 .hero h1{
   font-family:var(--display);font-weight:400;
   font-size:clamp(2.6rem,8.4vw,6.1rem);
@@ -119,7 +129,7 @@ a{color:inherit}
   font-family:var(--display);font-weight:400;
   font-size:clamp(1.7rem,4vw,2.7rem);line-height:1.35;margin-bottom:1.1rem;
 }
-.sec-note{color:var(--kinu-dim);max-width:52ch;font-size:.98rem;line-height:1.95}
+.sec-note{color:var(--kinu-dim);max-width:54ch;font-size:.98rem;line-height:1.95}
 .band-moegi .sec-note{color:rgba(237,230,218,.78)}
 
 /* ── ルール ─────────────────────────────── */
@@ -144,31 +154,42 @@ a{color:inherit}
 .why p+p{margin-top:1.1rem}
 .why strong{color:var(--kin);font-weight:700}
 
-/* ── 五虎 ───────────────────────────────── */
-.tigers{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-  gap:16px;margin-top:clamp(38px,5.5vh,54px);
+/* ── 十二支の審査官 ─────────────────────── */
+.judges{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));
+  gap:14px;margin-top:clamp(38px,5.5vh,54px);
 }
-.tiger{
-  background:var(--sumi);border:1px solid var(--line);
-  padding:26px 22px 24px;position:relative;overflow:hidden;
-  transition:border-color .35s ease;
+.judge{
+  background:var(--sumi-2);border:1px solid var(--line);
+  padding:24px 22px 22px;position:relative;overflow:hidden;
+  transition:border-color .35s ease,background .35s ease;
 }
-.tiger::before{
+.judge::before{
   content:"";position:absolute;top:0;left:0;width:3px;height:0;
   background:var(--kaki);transition:height .45s cubic-bezier(.22,1,.36,1);
 }
-.tiger:hover{border-color:rgba(237,230,218,.3)}
-.tiger:hover::before{height:100%}
-.tiger-n{font-family:var(--mono);font-size:.66rem;color:var(--kinu-dim);letter-spacing:.16em;display:block;margin-bottom:.85rem}
-.tiger-name{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.4;margin-bottom:.55rem}
-.tiger-axis{font-size:.8rem;color:var(--kin);margin-bottom:1rem;font-family:var(--mono);letter-spacing:.04em}
-.tiger-quote{
-  font-size:.93rem;line-height:1.8;color:var(--kinu);
-  padding-top:1rem;border-top:1px solid var(--line);
+.judge:hover{border-color:rgba(237,230,218,.3);background:var(--sumi-3)}
+.judge:hover::before{height:100%}
+.judge-head{display:flex;align-items:baseline;gap:.75rem;margin-bottom:.55rem}
+.judge-kanji{
+  font-family:var(--display);font-weight:400;
+  font-size:2.55rem;line-height:1;color:var(--kinu);
 }
-.tiger-quote::before{content:"「";color:var(--kaki-2)}
-.tiger-quote::after{content:"」";color:var(--kaki-2)}
+.judge-yomi{font-family:var(--mono);font-size:.7rem;color:var(--kinu-dim);letter-spacing:.14em}
+.judge-n{
+  font-family:var(--mono);font-size:.64rem;color:var(--kin);
+  letter-spacing:.14em;display:block;margin-bottom:.9rem;
+}
+.judge-axis{
+  font-size:.86rem;color:var(--kin);margin-bottom:.9rem;
+  font-weight:700;letter-spacing:.02em;
+}
+.judge-quote{
+  font-size:.89rem;line-height:1.8;color:var(--kinu-dim);
+  padding-top:.9rem;border-top:1px solid var(--line);
+}
+.judge-quote::before{content:"「";color:var(--kaki-2)}
+.judge-quote::after{content:"」";color:var(--kaki-2)}
 
 /* ── 賞 ─────────────────────────────────── */
 .prize-grid{
@@ -233,9 +254,9 @@ a{color:inherit}
 .foot-t{font-size:.85rem;color:var(--kinu-dim);line-height:1.85;max-width:40ch}
 .foot-meta{font-family:var(--mono);font-size:.73rem;color:var(--kinu-dim);letter-spacing:.06em;line-height:2}
 
-/* ── ロード演出（幕が上がる）─────────────── */
+/* ── ロード演出 ─────────────────────────── */
 .rise{opacity:0;transform:translateY(22px);animation:rise .9s cubic-bezier(.22,1,.36,1) forwards}
-.d1{animation-delay:.08s}.d2{animation-delay:.2s}.d3{animation-delay:.32s}.d4{animation-delay:.46s}
+.d1{animation-delay:.06s}.d2{animation-delay:.16s}.d3{animation-delay:.28s}.d4{animation-delay:.4s}.d5{animation-delay:.54s}
 @keyframes rise{to{opacity:1;transform:translateY(0)}}
 
 @media (prefers-reduced-motion:reduce){
@@ -246,6 +267,7 @@ a{color:inherit}
 @media (max-width:640px){
   .hero h1{font-size:clamp(2.1rem,10vw,3rem)}
   .foot-row{flex-direction:column}
+  .judge-kanji{font-size:2.2rem}
 }
 </style>
 </head>
@@ -256,12 +278,13 @@ a{color:inherit}
 <!-- ═══ ヒーロー ═══ -->
 <header class="hero">
   <div class="wrap hero-inner">
-    <span class="eyebrow rise d1">第一回 志願者募集中</span>
-    <h1 class="rise d2">顔を出さずに、<br><em>挑んでいい。</em></h1>
-    <p class="lede rise d3">人とAIが、同じ土俵でピッチする番組です。虎は、目の前の相手がどちらなのか知らされないまま審査します。</p>
-    <p class="lede-sub rise d3">正体が明かされるのは、判定が終わったあと。</p>
+    <div class="brand rise d1">干支ファウンディング</div>
+    <span class="eyebrow rise d2">第一回 挑戦者募集中</span>
+    <h1 class="rise d3">顔を出さずに、<br><em>挑んでいい。</em></h1>
+    <p class="lede rise d4">人とAIが、同じ土俵でピッチする番組です。十二支の審査官は、目の前の相手がどちらなのか知らされないまま審査します。</p>
+    <p class="lede-sub rise d4">正体が明かされるのは、判定が終わったあと。</p>
 
-    <div class="gates rise d4">
+    <div class="gates rise d5">
       <a class="gate" href="#apply">
         <span class="gate-tag">入口 その一</span>
         <div class="gate-title">自分で出る</div>
@@ -271,7 +294,7 @@ a{color:inherit}
       <a class="gate" href="#apply">
         <span class="gate-tag">入口 その二</span>
         <div class="gate-title">AIに託す</div>
-        <p class="gate-desc">あなたの事業を、AIの志願者が代わりにピッチする。名前も顔も声も出さない。人前に立てない事情があっても、事業は事業として審査される。</p>
+        <p class="gate-desc">あなたの事業を、AIの挑戦者が代わりにピッチする。名前も顔も声も出さない。人前に立てない事情があっても、事業は事業として審査される。</p>
         <div class="gate-arrow"><span>→</span> この形で応募する</div>
       </a>
     </div>
@@ -289,13 +312,13 @@ a{color:inherit}
     <div class="rules">
       <div class="rule">
         <span class="rule-n">RULE 01</span>
-        <div class="rule-t">志願者に、人とAIが混ざる</div>
+        <div class="rule-t">挑戦者に、人とAIが混ざる</div>
         <p class="rule-d">毎回の登壇者のうち何組がAIなのかは、放送中は公表しません。</p>
       </div>
       <div class="rule">
         <span class="rule-n">RULE 02</span>
-        <div class="rule-t">虎は、どちらか知らないまま裁く</div>
-        <p class="rule-d">五人の虎にも事前に伝えません。虎が見るのは事業計画と、その受け答えだけです。</p>
+        <div class="rule-t">審査官も、どちらか知らないまま裁く</div>
+        <p class="rule-d">その回に立つ審査官にも事前に伝えません。見るのは事業計画と、その受け答えだけです。</p>
       </div>
       <div class="rule">
         <span class="rule-n">RULE 03</span>
@@ -311,42 +334,84 @@ a{color:inherit}
   </div>
 </section>
 
-<!-- ═══ 五虎 ═══ -->
+<!-- ═══ 十二支の審査官 ═══ -->
 <section class="band">
   <div class="wrap">
-    <h2 class="sec-title">五虎</h2>
-    <p class="sec-note">実在の起業家ではありません。世界の起業家に繰り返し現れる五つの「考え方の型」を、それぞれ一体の虎として組み上げたものです。五人とも忖度をしません。人間関係も、スポンサーも、炎上リスクも持っていないからです。</p>
+    <h2 class="sec-title">十二支の審査官</h2>
+    <p class="sec-note">実在の人物ではありません。事業を見るときに繰り返し現れる十二の「問いの型」を、それぞれ一体の審査官として組み上げたものです。毎回このうち五体が審査に立ちます。誰が出るかは、その回まで分かりません。十二体とも忖度をしません。人間関係も、スポンサーも、炎上リスクも持っていないからです。</p>
 
-    <div class="tigers">
-      <article class="tiger">
-        <span class="tiger-n">TIGER 01</span>
-        <h3 class="tiger-name">原理の虎</h3>
-        <div class="tiger-axis">前提を疑う</div>
-        <p class="tiger-quote">なぜそれが必要なのか、原子まで分解して話せ</p>
+    <div class="judges">
+      <article class="judge">
+        <span class="judge-n">FIRST</span>
+        <div class="judge-head"><span class="judge-kanji">子</span><span class="judge-yomi">NE</span></div>
+        <div class="judge-axis">増え方を見る</div>
+        <p class="judge-quote">一が百になるまで、何日かかる</p>
       </article>
-      <article class="tiger">
-        <span class="tiger-n">TIGER 02</span>
-        <h3 class="tiger-name">引き算の虎</h3>
-        <div class="tiger-axis">体験を研ぐ</div>
-        <p class="tiger-quote">機能を足す前に、三つ捨ててから来い</p>
+      <article class="judge">
+        <span class="judge-n">SECOND</span>
+        <div class="judge-head"><span class="judge-kanji">丑</span><span class="judge-yomi">USHI</span></div>
+        <div class="judge-axis">続く体力を見る</div>
+        <p class="judge-quote">三年続けられるか。やめる理由を先に言え</p>
       </article>
-      <article class="tiger">
-        <span class="tiger-n">TIGER 03</span>
-        <h3 class="tiger-name">接続の虎</h3>
-        <div class="tiger-axis">広がる仕組み</div>
-        <p class="tiger-quote">十人が十万人になる仕組みは、どこにある</p>
+      <article class="judge">
+        <span class="judge-n">THIRD</span>
+        <div class="judge-head"><span class="judge-kanji">寅</span><span class="judge-yomi">TORA</span></div>
+        <div class="judge-axis">勝負どころを見る</div>
+        <p class="judge-quote">いつ賭ける。今か、まだか</p>
       </article>
-      <article class="tiger">
-        <span class="tiger-n">TIGER 04</span>
-        <h3 class="tiger-name">勘定の虎</h3>
-        <div class="tiger-axis">数字と収益</div>
-        <p class="tiger-quote">来月も、同じ金が入るのか</p>
+      <article class="judge">
+        <span class="judge-n">FOURTH</span>
+        <div class="judge-head"><span class="judge-kanji">卯</span><span class="judge-yomi">U</span></div>
+        <div class="judge-axis">跳ぶ先を見る</div>
+        <p class="judge-quote">跳ぶ前に、着地点を見ているか</p>
       </article>
-      <article class="tiger">
-        <span class="tiger-n">TIGER 05</span>
-        <h3 class="tiger-name">現場の虎</h3>
-        <div class="tiger-axis">実行と継続</div>
-        <p class="tiger-quote">で、今日は何をやった</p>
+      <article class="judge">
+        <span class="judge-n">FIFTH</span>
+        <div class="judge-head"><span class="judge-kanji">辰</span><span class="judge-yomi">TATSU</span></div>
+        <div class="judge-axis">独自性を見る</div>
+        <p class="judge-quote">それは、まだ誰も見たことがないものか</p>
+      </article>
+      <article class="judge">
+        <span class="judge-n">SIXTH</span>
+        <div class="judge-head"><span class="judge-kanji">巳</span><span class="judge-yomi">MI</span></div>
+        <div class="judge-axis">捨てる覚悟を見る</div>
+        <p class="judge-quote">脱ぎ捨てられる部分は、どこだ</p>
+      </article>
+      <article class="judge">
+        <span class="judge-n">SEVENTH</span>
+        <div class="judge-head"><span class="judge-kanji">午</span><span class="judge-yomi">UMA</span></div>
+        <div class="judge-axis">走る速さを見る</div>
+        <p class="judge-quote">で、今日は何をやった</p>
+      </article>
+      <article class="judge">
+        <span class="judge-n">EIGHTH</span>
+        <div class="judge-head"><span class="judge-kanji">未</span><span class="judge-yomi">HITSUJI</span></div>
+        <div class="judge-axis">群れを見る</div>
+        <p class="judge-quote">誰と一緒にいる事業だ</p>
+      </article>
+      <article class="judge">
+        <span class="judge-n">NINTH</span>
+        <div class="judge-head"><span class="judge-kanji">申</span><span class="judge-yomi">SARU</span></div>
+        <div class="judge-axis">仕組みを見る</div>
+        <p class="judge-quote">人の手でやっている部分は、いくつ残っている</p>
+      </article>
+      <article class="judge">
+        <span class="judge-n">TENTH</span>
+        <div class="judge-head"><span class="judge-kanji">酉</span><span class="judge-yomi">TORI</span></div>
+        <div class="judge-axis">客の出どころを見る</div>
+        <p class="judge-quote">最初の十人の名前を言え</p>
+      </article>
+      <article class="judge">
+        <span class="judge-n">ELEVENTH</span>
+        <div class="judge-head"><span class="judge-kanji">戌</span><span class="judge-yomi">INU</span></div>
+        <div class="judge-axis">戻る理由を見る</div>
+        <p class="judge-quote">一度買った人が、二度目も買う理由は</p>
+      </article>
+      <article class="judge">
+        <span class="judge-n">TWELFTH</span>
+        <div class="judge-head"><span class="judge-kanji">亥</span><span class="judge-yomi">I</span></div>
+        <div class="judge-axis">止まらなさを見る</div>
+        <p class="judge-quote">全員に止められたとき、それでもやるか</p>
       </article>
     </div>
   </div>
@@ -375,7 +440,7 @@ a{color:inherit}
       </div>
     </div>
 
-    <p class="prize-note">五虎が全員「ALL」を出した回は、上の三つすべてを提供します。一部の虎だけが通した場合は、どこまでやるかを相談のうえで決めます。</p>
+    <p class="prize-note">その回の五体全員が通した場合は、上の三つすべてを提供します。一部だけが通した場合は、どこまでやるかを相談のうえで決めます。</p>
   </div>
 </section>
 
@@ -426,12 +491,12 @@ a{color:inherit}
 <footer class="foot">
   <div class="wrap foot-row">
     <div>
-      <div class="foot-brand">AIの虎</div>
+      <div class="foot-brand">干支ファウンディング</div>
       <p class="foot-t">人とAIが同じ土俵でピッチする番組。顔を出せない事情のある人も、事業だけで勝負できる場所にします。</p>
     </div>
     <div class="foot-meta">
       企画・制作　RYOSEIWORLD<br>
-      第一回　志願者募集中
+      第一回　挑戦者募集中
     </div>
   </div>
 </footer>
