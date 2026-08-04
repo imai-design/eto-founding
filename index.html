@@ -156,38 +156,55 @@ a{color:inherit}
 
 /* ── 十二支の審査官 ─────────────────────── */
 .judges{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));
   gap:14px;margin-top:clamp(38px,5.5vh,54px);
 }
 .judge{
+  position:relative;aspect-ratio:2/3;overflow:hidden;
   background:var(--sumi-2);border:1px solid var(--line);
-  padding:24px 22px 22px;position:relative;overflow:hidden;
-  transition:border-color .35s ease,background .35s ease;
+  display:flex;align-items:flex-end;
+  transition:border-color .35s ease;
 }
-.judge::before{
-  content:"";position:absolute;top:0;left:0;width:3px;height:0;
-  background:var(--kaki);transition:height .45s cubic-bezier(.22,1,.36,1);
+.judge:hover{border-color:rgba(201,162,39,.45)}
+.judge-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 28%;
+  transition:transform .7s cubic-bezier(.22,1,.36,1);
 }
-.judge:hover{border-color:rgba(237,230,218,.3);background:var(--sumi-3)}
-.judge:hover::before{height:100%}
-.judge-head{display:flex;align-items:baseline;gap:.8rem;margin-bottom:.7rem}
+.judge:hover .judge-img{transform:scale(1.045)}
+.judge-body{
+  position:relative;z-index:1;width:100%;
+  padding:26px 20px 20px;
+  /* 口癖の行数がカードごとに違っても漢字の高さを揃えるため下限を持たせる */
+  min-height:58%;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(180deg,
+    transparent 0%,
+    rgba(20,17,15,.55) 22%,
+    rgba(20,17,15,.9) 52%,
+    rgba(20,17,15,.97) 100%);
+}
+.judge-body .judge-n{margin-top:auto}
+.judge-n{
+  font-family:var(--mono);font-size:.62rem;color:var(--kin);
+  letter-spacing:.14em;display:block;margin-bottom:.5rem;
+}
+.judge-head{display:flex;align-items:baseline;gap:.7rem;margin-bottom:.45rem}
 .judge-kanji{
   font-family:var(--display);font-weight:400;
-  font-size:3.3rem;line-height:1.12;color:var(--kinu);
-  display:block;
+  font-size:2.6rem;line-height:1.1;color:var(--kinu);display:block;
+  text-shadow:0 2px 12px rgba(20,17,15,.8);
 }
-.judge-yomi{font-family:var(--mono);font-size:.7rem;color:var(--kinu-dim);letter-spacing:.14em}
-.judge-n{
-  font-family:var(--mono);font-size:.64rem;color:var(--kin);
-  letter-spacing:.14em;display:block;margin-bottom:.9rem;
-}
+.judge-yomi{font-family:var(--mono);font-size:.66rem;color:var(--kinu-dim);letter-spacing:.14em}
 .judge-axis{
-  font-size:.86rem;color:var(--kin);margin-bottom:.9rem;
+  font-size:.83rem;color:var(--kin);margin-bottom:.7rem;
   font-weight:700;letter-spacing:.02em;
 }
 .judge-quote{
-  font-size:.89rem;line-height:1.8;color:var(--kinu-dim);
-  padding-top:.9rem;border-top:1px solid var(--line);
+  font-size:.84rem;line-height:1.75;color:rgba(237,230,218,.8);
+  padding-top:.7rem;border-top:1px solid rgba(237,230,218,.18);
+  /* 1行の口癖と2行の口癖が混在するので2行分で固定し、12枚の漢字の高さを揃える */
+  min-height:calc(1.75em * 2);
 }
 .judge-quote::before{content:"「";color:var(--kaki-2)}
 .judge-quote::after{content:"」";color:var(--kaki-2)}
@@ -268,7 +285,14 @@ a{color:inherit}
 @media (max-width:640px){
   .hero h1{font-size:clamp(2.1rem,10vw,3rem)}
   .foot-row{flex-direction:column}
-  .judge-kanji{font-size:2.2rem}
+  /* 12枚を1列で積むと縦6400px超になるため、狭い画面では2列にする */
+  .judges{grid-template-columns:repeat(2,1fr);gap:10px}
+  .judge-body{padding:20px 13px 13px;min-height:62%}
+  .judge-kanji{font-size:1.95rem}
+  .judge-yomi{font-size:.58rem}
+  .judge-n{font-size:.55rem;margin-bottom:.35rem}
+  .judge-axis{font-size:.74rem;margin-bottom:.5rem}
+  .judge-quote{font-size:.72rem;line-height:1.7;padding-top:.55rem;min-height:calc(1.7em * 2)}
 }
 </style>
 </head>
@@ -343,76 +367,112 @@ a{color:inherit}
 
     <div class="judges">
       <article class="judge">
-        <span class="judge-n">FIRST</span>
-        <div class="judge-head"><span class="judge-kanji">子</span><span class="judge-yomi">NE</span></div>
-        <div class="judge-axis">増え方を見る</div>
-        <p class="judge-quote">一が百になるまで、何日かかる</p>
+        <img class="judge-img" src="img/judge-ne.jpg" alt="子の審査官がつけている能面" loading="lazy" width="720" height="1080">
+        <div class="judge-body">
+          <span class="judge-n">FIRST</span>
+          <div class="judge-head"><span class="judge-kanji">子</span><span class="judge-yomi">NE</span></div>
+          <div class="judge-axis">増え方を見る</div>
+          <p class="judge-quote">一が百になるまで、何日かかる</p>
+        </div>
       </article>
       <article class="judge">
-        <span class="judge-n">SECOND</span>
-        <div class="judge-head"><span class="judge-kanji">丑</span><span class="judge-yomi">USHI</span></div>
-        <div class="judge-axis">続く体力を見る</div>
-        <p class="judge-quote">三年続けられるか。やめる理由を先に言え</p>
+        <img class="judge-img" src="img/judge-ushi.jpg" alt="丑の審査官がつけている能面" loading="lazy" width="720" height="1080">
+        <div class="judge-body">
+          <span class="judge-n">SECOND</span>
+          <div class="judge-head"><span class="judge-kanji">丑</span><span class="judge-yomi">USHI</span></div>
+          <div class="judge-axis">続く体力を見る</div>
+          <p class="judge-quote">三年続けられるか。やめる理由を先に言え</p>
+        </div>
       </article>
       <article class="judge">
-        <span class="judge-n">THIRD</span>
-        <div class="judge-head"><span class="judge-kanji">寅</span><span class="judge-yomi">TORA</span></div>
-        <div class="judge-axis">勝負どころを見る</div>
-        <p class="judge-quote">いつ賭ける。今か、まだか</p>
+        <img class="judge-img" src="img/judge-tora.jpg" alt="寅の審査官がつけている能面" loading="lazy" width="720" height="1080">
+        <div class="judge-body">
+          <span class="judge-n">THIRD</span>
+          <div class="judge-head"><span class="judge-kanji">寅</span><span class="judge-yomi">TORA</span></div>
+          <div class="judge-axis">勝負どころを見る</div>
+          <p class="judge-quote">いつ賭ける。今か、まだか</p>
+        </div>
       </article>
       <article class="judge">
-        <span class="judge-n">FOURTH</span>
-        <div class="judge-head"><span class="judge-kanji">卯</span><span class="judge-yomi">U</span></div>
-        <div class="judge-axis">跳ぶ先を見る</div>
-        <p class="judge-quote">跳ぶ前に、着地点を見ているか</p>
+        <img class="judge-img" src="img/judge-u.jpg" alt="卯の審査官がつけている能面" loading="lazy" width="720" height="1080">
+        <div class="judge-body">
+          <span class="judge-n">FOURTH</span>
+          <div class="judge-head"><span class="judge-kanji">卯</span><span class="judge-yomi">U</span></div>
+          <div class="judge-axis">跳ぶ先を見る</div>
+          <p class="judge-quote">跳ぶ前に、着地点を見ているか</p>
+        </div>
       </article>
       <article class="judge">
-        <span class="judge-n">FIFTH</span>
-        <div class="judge-head"><span class="judge-kanji">辰</span><span class="judge-yomi">TATSU</span></div>
-        <div class="judge-axis">独自性を見る</div>
-        <p class="judge-quote">それは、まだ誰も見たことがないものか</p>
+        <img class="judge-img" src="img/judge-tatsu.jpg" alt="辰の審査官がつけている能面" loading="lazy" width="720" height="1080">
+        <div class="judge-body">
+          <span class="judge-n">FIFTH</span>
+          <div class="judge-head"><span class="judge-kanji">辰</span><span class="judge-yomi">TATSU</span></div>
+          <div class="judge-axis">独自性を見る</div>
+          <p class="judge-quote">それは、まだ誰も見たことがないものか</p>
+        </div>
       </article>
       <article class="judge">
-        <span class="judge-n">SIXTH</span>
-        <div class="judge-head"><span class="judge-kanji">巳</span><span class="judge-yomi">MI</span></div>
-        <div class="judge-axis">捨てる覚悟を見る</div>
-        <p class="judge-quote">脱ぎ捨てられる部分は、どこだ</p>
+        <img class="judge-img" src="img/judge-mi.jpg" alt="巳の審査官がつけている能面" loading="lazy" width="720" height="1080">
+        <div class="judge-body">
+          <span class="judge-n">SIXTH</span>
+          <div class="judge-head"><span class="judge-kanji">巳</span><span class="judge-yomi">MI</span></div>
+          <div class="judge-axis">捨てる覚悟を見る</div>
+          <p class="judge-quote">脱ぎ捨てられる部分は、どこだ</p>
+        </div>
       </article>
       <article class="judge">
-        <span class="judge-n">SEVENTH</span>
-        <div class="judge-head"><span class="judge-kanji">午</span><span class="judge-yomi">UMA</span></div>
-        <div class="judge-axis">走る速さを見る</div>
-        <p class="judge-quote">で、今日は何をやった</p>
+        <img class="judge-img" src="img/judge-uma.jpg" alt="午の審査官がつけている能面" loading="lazy" width="720" height="1080">
+        <div class="judge-body">
+          <span class="judge-n">SEVENTH</span>
+          <div class="judge-head"><span class="judge-kanji">午</span><span class="judge-yomi">UMA</span></div>
+          <div class="judge-axis">走る速さを見る</div>
+          <p class="judge-quote">で、今日は何をやった</p>
+        </div>
       </article>
       <article class="judge">
-        <span class="judge-n">EIGHTH</span>
-        <div class="judge-head"><span class="judge-kanji">未</span><span class="judge-yomi">HITSUJI</span></div>
-        <div class="judge-axis">群れを見る</div>
-        <p class="judge-quote">誰と一緒にいる事業だ</p>
+        <img class="judge-img" src="img/judge-hitsuji.jpg" alt="未の審査官がつけている能面" loading="lazy" width="720" height="1080">
+        <div class="judge-body">
+          <span class="judge-n">EIGHTH</span>
+          <div class="judge-head"><span class="judge-kanji">未</span><span class="judge-yomi">HITSUJI</span></div>
+          <div class="judge-axis">群れを見る</div>
+          <p class="judge-quote">誰と一緒にいる事業だ</p>
+        </div>
       </article>
       <article class="judge">
-        <span class="judge-n">NINTH</span>
-        <div class="judge-head"><span class="judge-kanji">申</span><span class="judge-yomi">SARU</span></div>
-        <div class="judge-axis">仕組みを見る</div>
-        <p class="judge-quote">人の手でやっている部分は、いくつ残っている</p>
+        <img class="judge-img" src="img/judge-saru.jpg" alt="申の審査官がつけている能面" loading="lazy" width="720" height="1080">
+        <div class="judge-body">
+          <span class="judge-n">NINTH</span>
+          <div class="judge-head"><span class="judge-kanji">申</span><span class="judge-yomi">SARU</span></div>
+          <div class="judge-axis">仕組みを見る</div>
+          <p class="judge-quote">人の手でやっている部分は、いくつ残っている</p>
+        </div>
       </article>
       <article class="judge">
-        <span class="judge-n">TENTH</span>
-        <div class="judge-head"><span class="judge-kanji">酉</span><span class="judge-yomi">TORI</span></div>
-        <div class="judge-axis">客の出どころを見る</div>
-        <p class="judge-quote">最初の十人の名前を言え</p>
+        <img class="judge-img" src="img/judge-tori.jpg" alt="酉の審査官がつけている能面" loading="lazy" width="720" height="1080">
+        <div class="judge-body">
+          <span class="judge-n">TENTH</span>
+          <div class="judge-head"><span class="judge-kanji">酉</span><span class="judge-yomi">TORI</span></div>
+          <div class="judge-axis">客の出どころを見る</div>
+          <p class="judge-quote">最初の十人の名前を言え</p>
+        </div>
       </article>
       <article class="judge">
-        <span class="judge-n">ELEVENTH</span>
-        <div class="judge-head"><span class="judge-kanji">戌</span><span class="judge-yomi">INU</span></div>
-        <div class="judge-axis">戻る理由を見る</div>
-        <p class="judge-quote">一度買った人が、二度目も買う理由は</p>
+        <img class="judge-img" src="img/judge-inu.jpg" alt="戌の審査官がつけている能面" loading="lazy" width="720" height="1080">
+        <div class="judge-body">
+          <span class="judge-n">ELEVENTH</span>
+          <div class="judge-head"><span class="judge-kanji">戌</span><span class="judge-yomi">INU</span></div>
+          <div class="judge-axis">戻る理由を見る</div>
+          <p class="judge-quote">一度買った人が、二度目も買う理由は</p>
+        </div>
       </article>
       <article class="judge">
-        <span class="judge-n">TWELFTH</span>
-        <div class="judge-head"><span class="judge-kanji">亥</span><span class="judge-yomi">I</span></div>
-        <div class="judge-axis">止まらなさを見る</div>
-        <p class="judge-quote">全員に止められたとき、それでもやるか</p>
+        <img class="judge-img" src="img/judge-i.jpg" alt="亥の審査官がつけている能面" loading="lazy" width="720" height="1080">
+        <div class="judge-body">
+          <span class="judge-n">TWELFTH</span>
+          <div class="judge-head"><span class="judge-kanji">亥</span><span class="judge-yomi">I</span></div>
+          <div class="judge-axis">止まらなさを見る</div>
+          <p class="judge-quote">全員に止められたとき、それでもやるか</p>
+        </div>
       </article>
     </div>
   </div>
