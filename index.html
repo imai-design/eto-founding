@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>AIの虎 — 顔を出さずに、挑んでいい</title>
+<meta name="description" content="人とAIが同じ土俵でピッチする番組。虎は、目の前の相手がどちらなのか知らないまま裁く。第一回 志願者募集中。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314110F'/%3E%3Crect x='5' y='4' width='6' height='24' fill='%232A2521'/%3E%3Crect x='13' y='4' width='6' height='24' fill='%23A44A2A'/%3E%3Crect x='21' y='4' width='6' height='24' fill='%23265343'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sumi:#14110F;
+  --sumi-2:#1E1A17;
+  --sumi-3:#2A2521;
+  --moegi:#1B3B2F;
+  --moegi-2:#265343;
+  --kaki:#A44A2A;
+  --kaki-2:#C2603C;
+  --kin:#C9A227;
+  --kinu:#EDE6DA;
+  --kinu-dim:#9C948A;
+  --line:rgba(237,230,218,.14);
+  --display:"Dela Gothic One",sans-serif;
+  --body:"Zen Kaku Gothic New",sans-serif;
+  --mono:"DM Mono",monospace;
+  --gut:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--sumi);color:var(--kinu);
+  font-family:var(--body);font-weight:400;line-height:1.85;
+  font-feature-settings:"palt";
+  word-break:auto-phrase;
+  overflow-wrap:anywhere;
+  overflow-x:hidden;
+}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--kin);outline-offset:3px}
+
+/* ── 定式幕の帯（構造の骨格）─────────────── */
+.maku{display:flex;height:6px;width:100%}
+.maku i{flex:1;display:block}
+.maku i:nth-child(1){background:var(--sumi-3)}
+.maku i:nth-child(2){background:var(--kaki)}
+.maku i:nth-child(3){background:var(--moegi-2)}
+
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gut)}
+
+.eyebrow{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;
+  color:var(--kin);text-transform:uppercase;display:block;margin-bottom:1.5rem;
+}
+
+/* ── ヒーロー ───────────────────────────── */
+.hero{position:relative;padding:clamp(64px,11vh,120px) 0 clamp(56px,8vh,88px);overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(115% 78% at 12% 0%,rgba(27,59,47,.55) 0%,transparent 62%);
+  pointer-events:none;
+}
+.hero-inner{position:relative}
+.hero h1{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(2.6rem,8.4vw,6.1rem);
+  line-height:1.14;letter-spacing:.005em;margin-bottom:1.6rem;
+}
+.hero h1 em{font-style:normal;color:var(--kaki-2);display:inline-block}
+.lede{
+  font-size:clamp(1rem,1.65vw,1.2rem);max-width:48ch;
+  color:var(--kinu);line-height:1.95;margin-bottom:.7rem;
+}
+.lede-sub{font-size:clamp(.92rem,1.4vw,1.03rem);color:var(--kinu-dim);max-width:48ch;line-height:1.9}
+
+/* ── signature：二つの入口 ───────────────── */
+.gates{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));
+  gap:18px;margin-top:clamp(38px,5.5vh,58px);
+}
+.gate{
+  position:relative;display:block;text-decoration:none;
+  background:var(--sumi-2);border:1px solid var(--line);
+  padding:30px 28px 28px;overflow:hidden;
+  transition:border-color .35s ease,transform .35s ease;
+}
+.gate::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:100%;
+  background:linear-gradient(180deg,transparent 0%,rgba(164,74,42,.13) 100%);
+  transform:translateY(100%);transition:transform .45s cubic-bezier(.22,1,.36,1);
+  pointer-events:none;
+}
+.gate:hover,.gate:focus-visible{border-color:rgba(201,162,39,.5);transform:translateY(-3px)}
+.gate:hover::after,.gate:focus-visible::after{transform:translateY(0)}
+.gate-tag{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;
+  color:var(--kin);display:block;margin-bottom:.85rem;
+}
+.gate-title{
+  font-family:var(--display);font-weight:400;font-size:clamp(1.35rem,2.6vw,1.72rem);
+  line-height:1.4;margin-bottom:.8rem;position:relative;z-index:1;
+}
+.gate-desc{font-size:.93rem;color:var(--kinu-dim);line-height:1.85;position:relative;z-index:1}
+.gate-arrow{
+  margin-top:1.35rem;font-family:var(--mono);font-size:.78rem;
+  color:var(--kaki-2);letter-spacing:.08em;position:relative;z-index:1;
+  display:flex;align-items:center;gap:.5rem;
+}
+.gate-arrow span{transition:transform .35s ease}
+.gate:hover .gate-arrow span{transform:translateX(5px)}
+
+/* ── 共通セクション ─────────────────────── */
+.band{padding:clamp(66px,10vh,110px) 0}
+.band-moegi{background:var(--moegi)}
+.band-sumi2{background:var(--sumi-2)}
+.sec-title{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(1.7rem,4vw,2.7rem);line-height:1.35;margin-bottom:1.1rem;
+}
+.sec-note{color:var(--kinu-dim);max-width:52ch;font-size:.98rem;line-height:1.95}
+.band-moegi .sec-note{color:rgba(237,230,218,.78)}
+
+/* ── ルール ─────────────────────────────── */
+.rules{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));
+  gap:2px;margin-top:clamp(34px,5vh,50px);
+  background:rgba(237,230,218,.13);border:1px solid rgba(237,230,218,.13);
+}
+.rule{background:var(--moegi);padding:30px 26px}
+.rule-n{
+  font-family:var(--mono);font-size:.7rem;color:var(--kin);
+  letter-spacing:.16em;display:block;margin-bottom:.9rem;
+}
+.rule-t{font-weight:700;font-size:1.06rem;line-height:1.6;margin-bottom:.6rem}
+.rule-d{font-size:.9rem;color:rgba(237,230,218,.72);line-height:1.85}
+
+.why{
+  margin-top:clamp(40px,6vh,62px);padding:clamp(28px,4vw,40px);
+  background:rgba(20,17,15,.44);border-left:3px solid var(--kin);
+}
+.why p{font-size:clamp(1rem,1.75vw,1.22rem);line-height:1.95;max-width:46ch}
+.why p+p{margin-top:1.1rem}
+.why strong{color:var(--kin);font-weight:700}
+
+/* ── 五虎 ───────────────────────────────── */
+.tigers{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:16px;margin-top:clamp(38px,5.5vh,54px);
+}
+.tiger{
+  background:var(--sumi);border:1px solid var(--line);
+  padding:26px 22px 24px;position:relative;overflow:hidden;
+  transition:border-color .35s ease;
+}
+.tiger::before{
+  content:"";position:absolute;top:0;left:0;width:3px;height:0;
+  background:var(--kaki);transition:height .45s cubic-bezier(.22,1,.36,1);
+}
+.tiger:hover{border-color:rgba(237,230,218,.3)}
+.tiger:hover::before{height:100%}
+.tiger-n{font-family:var(--mono);font-size:.66rem;color:var(--kinu-dim);letter-spacing:.16em;display:block;margin-bottom:.85rem}
+.tiger-name{font-family:var(--display);font-weight:400;font-size:1.22rem;line-height:1.4;margin-bottom:.55rem}
+.tiger-axis{font-size:.8rem;color:var(--kin);margin-bottom:1rem;font-family:var(--mono);letter-spacing:.04em}
+.tiger-quote{
+  font-size:.93rem;line-height:1.8;color:var(--kinu);
+  padding-top:1rem;border-top:1px solid var(--line);
+}
+.tiger-quote::before{content:"「";color:var(--kaki-2)}
+.tiger-quote::after{content:"」";color:var(--kaki-2)}
+
+/* ── 賞 ─────────────────────────────────── */
+.prize-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));
+  gap:18px;margin-top:clamp(34px,5vh,48px);
+}
+.prize{background:var(--sumi);border:1px solid var(--line);padding:30px 26px}
+.prize-h{font-family:var(--display);font-weight:400;font-size:1.15rem;margin-bottom:.85rem;line-height:1.45}
+.prize-b{font-size:.93rem;color:var(--kinu-dim);line-height:1.85}
+.prize-note{
+  margin-top:clamp(30px,4vh,42px);font-size:.9rem;color:var(--kinu-dim);
+  max-width:56ch;line-height:1.9;
+}
+
+/* ── 応募 ───────────────────────────────── */
+.apply{text-align:left}
+.apply-inner{max-width:640px}
+.field{margin-bottom:22px}
+.field label{display:block;font-size:.86rem;font-weight:700;margin-bottom:.55rem;letter-spacing:.02em}
+.field .hint{font-weight:400;color:var(--kinu-dim);font-size:.8rem;margin-left:.6rem}
+.field input,.field textarea,.field select{
+  width:100%;background:var(--sumi);border:1px solid var(--line);
+  color:var(--kinu);font-family:var(--body);font-size:.97rem;
+  padding:13px 15px;line-height:1.7;border-radius:0;
+  transition:border-color .25s ease;
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--kin)}
+.field input:focus-visible,.field textarea:focus-visible,.field select:focus-visible{
+  outline:3px solid var(--kin);outline-offset:3px;
+}
+.field textarea{min-height:132px;resize:vertical}
+.choice{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.choice label{
+  display:block;background:var(--sumi);border:1px solid var(--line);
+  padding:16px 18px;cursor:pointer;font-weight:500;font-size:.93rem;
+  transition:border-color .25s ease,background .25s ease;margin:0;
+}
+.choice label:hover{border-color:rgba(237,230,218,.32)}
+.choice input{position:absolute;opacity:0;width:1px;height:1px}
+.choice input:checked+span{color:var(--kin)}
+.choice label:has(input:checked){border-color:var(--kin);background:rgba(201,162,39,.07)}
+.choice label:has(input:focus-visible){outline:3px solid var(--kin);outline-offset:3px}
+.choice small{display:block;font-weight:400;color:var(--kinu-dim);font-size:.79rem;margin-top:.4rem;line-height:1.65}
+.submit{
+  background:var(--kaki);color:#fff;border:none;
+  font-family:var(--display);font-weight:400;font-size:1.02rem;
+  padding:17px 40px;cursor:pointer;letter-spacing:.04em;
+  transition:background .25s ease,transform .25s ease;
+}
+.submit:hover{background:var(--kaki-2);transform:translateY(-2px)}
+.form-note{margin-top:1.1rem;font-size:.83rem;color:var(--kinu-dim);line-height:1.8}
+.send-result{
+  margin-top:1.2rem;padding:15px 18px;background:rgba(201,162,39,.1);
+  border-left:3px solid var(--kin);font-size:.92rem;line-height:1.8;
+}
+.send-result[hidden]{display:none}
+
+/* ── フッター ───────────────────────────── */
+.foot{padding:clamp(46px,7vh,70px) 0 clamp(34px,5vh,50px);border-top:1px solid var(--line)}
+.foot-row{display:flex;flex-wrap:wrap;gap:22px;justify-content:space-between;align-items:flex-start}
+.foot-brand{font-family:var(--display);font-weight:400;font-size:1.12rem;margin-bottom:.5rem}
+.foot-t{font-size:.85rem;color:var(--kinu-dim);line-height:1.85;max-width:40ch}
+.foot-meta{font-family:var(--mono);font-size:.73rem;color:var(--kinu-dim);letter-spacing:.06em;line-height:2}
+
+/* ── ロード演出（幕が上がる）─────────────── */
+.rise{opacity:0;transform:translateY(22px);animation:rise .9s cubic-bezier(.22,1,.36,1) forwards}
+.d1{animation-delay:.08s}.d2{animation-delay:.2s}.d3{animation-delay:.32s}.d4{animation-delay:.46s}
+@keyframes rise{to{opacity:1;transform:translateY(0)}}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  .rise{opacity:1;transform:none}
+}
+@media (max-width:640px){
+  .hero h1{font-size:clamp(2.1rem,10vw,3rem)}
+  .foot-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<div class="maku"><i></i><i></i><i></i></div>
+
+<!-- ═══ ヒーロー ═══ -->
+<header class="hero">
+  <div class="wrap hero-inner">
+    <span class="eyebrow rise d1">第一回 志願者募集中</span>
+    <h1 class="rise d2">顔を出さずに、<br><em>挑んでいい。</em></h1>
+    <p class="lede rise d3">人とAIが、同じ土俵でピッチする番組です。虎は、目の前の相手がどちらなのか知らされないまま審査します。</p>
+    <p class="lede-sub rise d3">正体が明かされるのは、判定が終わったあと。</p>
+
+    <div class="gates rise d4">
+      <a class="gate" href="#apply">
+        <span class="gate-tag">入口 その一</span>
+        <div class="gate-title">自分で出る</div>
+        <p class="gate-desc">カメラの前に立ち、自分の言葉で話す。名前も顔も出す、正面からの挑戦。</p>
+        <div class="gate-arrow"><span>→</span> この形で応募する</div>
+      </a>
+      <a class="gate" href="#apply">
+        <span class="gate-tag">入口 その二</span>
+        <div class="gate-title">AIに託す</div>
+        <p class="gate-desc">あなたの事業を、AIの志願者が代わりにピッチする。名前も顔も声も出さない。人前に立てない事情があっても、事業は事業として審査される。</p>
+        <div class="gate-arrow"><span>→</span> この形で応募する</div>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="maku"><i></i><i></i><i></i></div>
+
+<!-- ═══ ルール ═══ -->
+<section class="band band-moegi">
+  <div class="wrap">
+    <h2 class="sec-title">この番組のルール</h2>
+    <p class="sec-note">審査の公平さを担保するために、三つだけ決めています。</p>
+
+    <div class="rules">
+      <div class="rule">
+        <span class="rule-n">RULE 01</span>
+        <div class="rule-t">志願者に、人とAIが混ざる</div>
+        <p class="rule-d">毎回の登壇者のうち何組がAIなのかは、放送中は公表しません。</p>
+      </div>
+      <div class="rule">
+        <span class="rule-n">RULE 02</span>
+        <div class="rule-t">虎は、どちらか知らないまま裁く</div>
+        <p class="rule-d">五人の虎にも事前に伝えません。虎が見るのは事業計画と、その受け答えだけです。</p>
+      </div>
+      <div class="rule">
+        <span class="rule-n">RULE 03</span>
+        <div class="rule-t">正体は、判定のあとに明かす</div>
+        <p class="rule-d">全員の判定が出そろってから開示します。判定を後から変えることはできません。</p>
+      </div>
+    </div>
+
+    <div class="why">
+      <p>肩書きも、見た目も、話し方のうまさも、事業の中身とは関係ありません。<strong>それでも人は、そこで判断してしまう。</strong></p>
+      <p>だから、伏せます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 五虎 ═══ -->
+<section class="band">
+  <div class="wrap">
+    <h2 class="sec-title">五虎</h2>
+    <p class="sec-note">実在の起業家ではありません。世界の起業家に繰り返し現れる五つの「考え方の型」を、それぞれ一体の虎として組み上げたものです。五人とも忖度をしません。人間関係も、スポンサーも、炎上リスクも持っていないからです。</p>
+
+    <div class="tigers">
+      <article class="tiger">
+        <span class="tiger-n">TIGER 01</span>
+        <h3 class="tiger-name">原理の虎</h3>
+        <div class="tiger-axis">前提を疑う</div>
+        <p class="tiger-quote">なぜそれが必要なのか、原子まで分解して話せ</p>
+      </article>
+      <article class="tiger">
+        <span class="tiger-n">TIGER 02</span>
+        <h3 class="tiger-name">引き算の虎</h3>
+        <div class="tiger-axis">体験を研ぐ</div>
+        <p class="tiger-quote">機能を足す前に、三つ捨ててから来い</p>
+      </article>
+      <article class="tiger">
+        <span class="tiger-n">TIGER 03</span>
+        <h3 class="tiger-name">接続の虎</h3>
+        <div class="tiger-axis">広がる仕組み</div>
+        <p class="tiger-quote">十人が十万人になる仕組みは、どこにある</p>
+      </article>
+      <article class="tiger">
+        <span class="tiger-n">TIGER 04</span>
+        <h3 class="tiger-name">勘定の虎</h3>
+        <div class="tiger-axis">数字と収益</div>
+        <p class="tiger-quote">来月も、同じ金が入るのか</p>
+      </article>
+      <article class="tiger">
+        <span class="tiger-n">TIGER 05</span>
+        <h3 class="tiger-name">現場の虎</h3>
+        <div class="tiger-axis">実行と継続</div>
+        <p class="tiger-quote">で、今日は何をやった</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="maku"><i></i><i></i><i></i></div>
+
+<!-- ═══ 賞 ═══ -->
+<section class="band band-sumi2">
+  <div class="wrap">
+    <h2 class="sec-title">通ったら、何が起きるか</h2>
+    <p class="sec-note">この番組は出資をしません。代わりに、事業が動き出すのに要る物を作ります。お金を渡すより、そのほうが早く形になるからです。</p>
+
+    <div class="prize-grid">
+      <div class="prize">
+        <h3 class="prize-h">ホームページを無料で作る</h3>
+        <p class="prize-b">事業の顔になるサイトを、こちらで制作して公開まで持っていきます。制作費も公開費用もかかりません。</p>
+      </div>
+      <div class="prize">
+        <h3 class="prize-h">仕組みを無料で作る</h3>
+        <p class="prize-b">予約、問い合わせ、見積り、日々の事務。手が回らない部分を動くシステムにします。</p>
+      </div>
+      <div class="prize">
+        <h3 class="prize-h">立ち上げに伴走する</h3>
+        <p class="prize-b">作って渡して終わりにはしません。動き始めるまで、AIの使い方ごと引き継ぎます。</p>
+      </div>
+    </div>
+
+    <p class="prize-note">五虎が全員「ALL」を出した回は、上の三つすべてを提供します。一部の虎だけが通した場合は、どこまでやるかを相談のうえで決めます。</p>
+  </div>
+</section>
+
+<!-- ═══ 応募 ═══ -->
+<section class="band apply" id="apply">
+  <div class="wrap apply-inner">
+    <h2 class="sec-title">応募する</h2>
+    <p class="sec-note">事業がまだ形になっていなくても構いません。何を変えたいのかが書いてあれば、それで審査に進めます。</p>
+
+    <form style="margin-top:clamp(34px,5vh,48px)" id="applyForm">
+      <div class="field">
+        <label>どちらの形で出ますか</label>
+        <div class="choice">
+          <label><input type="radio" name="mode" value="self" checked><span>自分で出る</span><small>カメラの前に立つ</small></label>
+          <label><input type="radio" name="mode" value="ai"><span>AIに託す</span><small>顔も名前も出さない</small></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="name">お名前 <span class="hint">AIに託す場合も、連絡用に必要です</span></label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="field">
+        <label for="email">連絡のつくメールアドレス</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="field">
+        <label for="biz">やろうとしている事業 <span class="hint">200字くらいで</span></label>
+        <textarea id="biz" name="biz" required></textarea>
+      </div>
+
+      <div class="field">
+        <label for="why">なぜ、あなたがやるのか</label>
+        <textarea id="why" name="why" required></textarea>
+      </div>
+
+      <button type="submit" class="submit">応募を送る</button>
+      <p class="send-result" id="sendResult" tabindex="-1" role="status" aria-live="polite" hidden></p>
+      <p class="form-note">送信後、こちらから収録日のご相談をお送りします。落選した場合も必ずご連絡します。</p>
+    </form>
+  </div>
+</section>
+
+<div class="maku"><i></i><i></i><i></i></div>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <div>
+      <div class="foot-brand">AIの虎</div>
+      <p class="foot-t">人とAIが同じ土俵でピッチする番組。顔を出せない事情のある人も、事業だけで勝負できる場所にします。</p>
+    </div>
+    <div class="foot-meta">
+      企画・制作　RYOSEIWORLD<br>
+      第一回　志願者募集中
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('applyForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var note=document.getElementById('sendResult');
+  note.textContent='第一回の応募受付は準備中です。開始したらこのページでお知らせします。';
+  note.hidden=false;
+  note.focus();
+});
+</script>
+
+</body>
+</html>
